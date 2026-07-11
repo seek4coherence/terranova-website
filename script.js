@@ -92,6 +92,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (response.ok) {
+          // Track lead submission in Google Analytics
+          const submissionType = formData.get('submission_type') || 'Unknown';
+          if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+              event_category: 'Form Submission',
+              event_label: submissionType + ' Inquiry',
+              form_type: submissionType,
+              value: 1
+            });
+          }
+
           // Show success message
           form.style.display = 'none';
           const successEl = form.parentElement.querySelector('.form-success');
