@@ -225,13 +225,18 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   gap: 12px;
 }
 
-.navbar-logo img {
-  height: 80px;
-  width: auto;
+.navbar-logo .brand-text {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: all var(--transition-base);
 }
 
-.navbar.scrolled .navbar-logo img {
-  height: 60px;
+.navbar.scrolled .navbar-logo .brand-text {
+  font-size: 1.1rem;
 }
 
 .nav-links {
@@ -354,6 +359,13 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 .hero-content {
   flex: 1;
   max-width: 640px;
+}
+
+.hero-logo {
+  width: 160px;
+  height: auto;
+  margin-bottom: 28px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
 }
 
 .hero-badge {
