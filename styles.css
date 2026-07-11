@@ -226,12 +226,12 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 }
 
 .navbar-logo img {
-  height: 50px;
+  height: 80px;
   width: auto;
 }
 
 .navbar.scrolled .navbar-logo img {
-  height: 42px;
+  height: 60px;
 }
 
 .nav-links {
