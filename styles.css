@@ -227,16 +227,15 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 
 .navbar-logo .brand-text {
   font-family: var(--font-heading);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: var(--gold-light);
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: 1px;
   transition: all var(--transition-base);
 }
 
 .navbar.scrolled .navbar-logo .brand-text {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .nav-links {
@@ -361,11 +360,20 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   max-width: 640px;
 }
 
+.hero-logo-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .hero-logo {
-  width: 160px;
+  width: 200px;
   height: auto;
-  margin-bottom: 28px;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .hero-badge {
@@ -1334,6 +1342,28 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 
   .hero-stats {
     gap: 24px;
+  }
+
+  .hero .container {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 80px;
+  }
+
+  .hero-logo {
+    width: 140px;
+  }
+
+  .hero-badge {
+    justify-content: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    justify-content: center;
   }
 
   .about-values {
