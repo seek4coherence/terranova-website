@@ -742,31 +742,33 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 /* --- Comparison Section --- */
 .comparison {
   padding: var(--section-padding);
-  background: var(--white);
+  background: linear-gradient(170deg, #f0f4f8 0%, #e8ecf1 100%);
 }
 
 .comparison-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  max-width: 960px;
+  gap: 32px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
 .comparison-card {
-  padding: 40px 36px;
+  padding: 44px 38px;
   border-radius: var(--radius-lg);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
 .comparison-card.card-ours {
-  background: var(--navy);
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
   border: 2px solid var(--gold);
+  box-shadow: 0 8px 32px rgba(184, 134, 11, 0.15);
 }
 
 .comparison-card.card-traditional {
-  background: var(--gray-100);
+  background: var(--white);
   border: 2px solid var(--gray-200);
 }
 
@@ -845,7 +847,7 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 /* --- Situations Section --- */
 .situations {
   padding: var(--section-padding);
-  background: var(--off-white);
+  background: var(--white);
 }
 
 .situations-grid {
