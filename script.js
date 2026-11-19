@@ -7,35 +7,39 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Navbar Scroll Effect ---
   const navbar = document.getElementById('navbar');
 
-  const handleNavScroll = () => {
-    if (window.scrollY > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  };
+  if (navbar) {
+    const handleNavScroll = () => {
+      if (window.scrollY > 60) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    };
 
-  window.addEventListener('scroll', handleNavScroll, { passive: true });
-  handleNavScroll();
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    handleNavScroll();
+  }
 
   // --- Mobile Navigation ---
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
 
-  navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    navLinks.classList.toggle('open');
-    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
-  });
-
-  // Close mobile nav when a link is clicked
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navToggle.classList.remove('active');
-      navLinks.classList.remove('open');
-      document.body.style.overflow = '';
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
+      document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
     });
-  });
+
+    // Close mobile nav when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
 
   // --- Smooth Scroll for anchor links ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -65,24 +69,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update active panel
       panels.forEach(p => p.classList.remove('active'));
-      document.getElementById(`panel-${target}`).classList.add('active');
+      const panel = document.getElementById(`panel-${target}`);
+      if (panel) panel.classList.add('active');
     });
   });
 
   // --- Form Submission via Fetch (AJAX) ---
-  const forms = document.querySelectorAll('.form-container form');
+  // Any Formspree-backed form on any page is handled here, so service and
+  // location pages can carry their own lead form without extra JS.
+  const forms = document.querySelectorAll('form[action*="formspree.io"]');
 
   forms.forEach(form => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const submitBtn = form.querySelector('button[type="submit"]');
+      if (!submitBtn) return;
+
       const originalText = submitBtn.textContent;
       submitBtn.textContent = 'Sending...';
       submitBtn.disabled = true;
 
       try {
         const formData = new FormData(form);
+
+        // Attribute the lead to the page that captured it.
+        const formLocation = form.dataset.formLocation || window.location.pathname;
+        if (!formData.get('form_location')) {
+          formData.append('form_location', formLocation);
+        }
+
         const response = await fetch(form.action, {
           method: 'POST',
           body: formData,
@@ -99,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
               event_category: 'Form Submission',
               event_label: submissionType + ' Inquiry',
               form_type: submissionType,
+              form_location: formLocation,
               value: 1
             });
           }
@@ -129,6 +146,32 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           submitBtn.textContent = originalText;
         }, 3000);
+      }
+    });
+  });
+
+  // --- CTA and phone click tracking ---
+  // Fires on any element that looks like a primary call to action, plus tel: links.
+  document.querySelectorAll('a.btn, a.nav-cta, a[href^="tel:"]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (typeof gtag !== 'function') return;
+
+      const href = link.getAttribute('href') || '';
+      const label = (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60);
+
+      if (href.startsWith('tel:')) {
+        gtag('event', 'phone_click', {
+          event_category: 'Contact',
+          event_label: href.replace('tel:', ''),
+          link_url: href
+        });
+      } else {
+        gtag('event', 'cta_click', {
+          event_category: 'Engagement',
+          event_label: label,
+          cta_text: label,
+          cta_location: window.location.pathname
+        });
       }
     });
   });

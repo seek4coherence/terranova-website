@@ -1,0 +1,26 @@
+# ------------------------------------------------------------
+# OS and editor noise
+# ------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
+.vscode/
+
+# ------------------------------------------------------------
+# Tooling / MCP artifacts
+# These are handshake dumps written by local MCP servers and
+# must never be deployed to /public_html/.
+# ------------------------------------------------------------
+0.4.0
+*.log
+mcp-*.json
+
+# ------------------------------------------------------------
+# Local environment and secrets
+# ------------------------------------------------------------
+.env
+.env.*
+!.env.example
