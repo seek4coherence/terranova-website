@@ -41,6 +41,11 @@ vacant land headquartered in Louisville, Kentucky.
 │   ├── elizabethtown-ky.html
 │   ├── bowling-green-ky.html
 │   └── southern-indiana.html
+├── guides/
+│   ├── index.html                 Seller guides hub
+│   ├── sell-inherited-house.html  Probate, deed transfer, capital gains basics
+│   ├── stop-foreclosure.html      Kentucky judicial foreclosure and options
+│   └── sell-house-with-tenants.html  Leases, deposits, occupied sales
 ├── scripts/
 │   ├── verify.ps1                 Link, nav, and email checks
 │   └── verify-json.ps1            JSON-LD, H1, and form-tag checks
@@ -184,7 +189,38 @@ Both exit 0 and print `OK` when clean. Run them after adding or renaming any pag
 
 ---
 
-## 8. Conventions
+## 8. Keyword strategy
+
+Volumes below are Google Ads averages pulled for the Louisville DMA (location ID `200529`) and
+the US (`2840`). They are directional, not guarantees.
+
+| Term | Volume | Competition | Where it is targeted |
+| --- | --- | --- | --- |
+| sell my house fast | 9,900 US / 140 Louisville | LOW (index 6 local) | Homepage title + H1 |
+| we buy houses | 8,100 US / 140 Louisville | LOW / HIGH local | Homepage, Louisville H2 |
+| cash home buyers | 8,100 US | LOW | [`cash-home-buyers.html`](services/cash-home-buyers.html) |
+| sell house as is for cash | 2,900 US | LOW | [`sell-house-as-is.html`](services/sell-house-as-is.html) |
+| sell inherited house | 390 US | LOW | [`sell-inherited-house.html`](guides/sell-inherited-house.html) |
+| stop foreclosure | 720 US | LOW | [`stop-foreclosure.html`](guides/stop-foreclosure.html) |
+| sell house with tenants | 320 US | LOW | [`sell-house-with-tenants.html`](guides/sell-house-with-tenants.html) |
+| sell vacant land | 90 US | LOW | [`sell-vacant-land.html`](services/sell-vacant-land.html) |
+
+Two things this data makes clear:
+
+1. **Local head terms are small but winnable.** "Sell my house fast" in the Louisville DMA is
+   only ~140 searches a month, but the local competition index is 6 out of 100. A new site can
+   realistically reach page one. City-level terms for Lexington, Elizabethtown, and Bowling
+   Green are ~10/month each — worth having for coverage and trust, not for traffic volume.
+2. **Informational terms are the volume play.** "Stop foreclosure" and "sell inherited house"
+   each outdraw every city-level term combined. The guides exist to capture that demand and
+   funnel it to the service pages.
+
+Do not chase national head terms with a new domain. Build local relevance, neighborhood and
+county coverage, and the guide cluster first.
+
+---
+
+## 9. Conventions
 
 - **Paths:** root-relative (`/styles.css`, `/services/...`) on every page except the homepage,
   which uses relative paths. Keep it that way — the site is served from the domain root.
@@ -200,7 +236,7 @@ Both exit 0 and print `OK` when clean. Run them after adding or renaming any pag
 
 ---
 
-## 9. Known follow-ups
+## 10. Known follow-ups
 
 - Add `sameAs` social profile URLs to the `RealEstateAgent` schema in
   [`index.html`](index.html) once profiles exist.

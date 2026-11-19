@@ -19,12 +19,18 @@ foreach ($file in $files) {
     } else {
         $navCount = ([regex]::Matches($navMatch.Value, 'href="/locations/">Locations</a>')).Count
         if ($navCount -ne 1) { $problems.Add("$rel : nav Locations link count = $navCount") }
+
+        $guideNavCount = ([regex]::Matches($navMatch.Value, 'href="/guides/">Guides</a>')).Count
+        if ($guideNavCount -ne 1) { $problems.Add("$rel : nav Guides link count = $guideNavCount") }
     }
 
-    # Pages with a full footer grid must link to the locations hub.
+    # Pages with a full footer grid must link to the locations and guides hubs.
     if ($text -match 'class="footer-grid') {
         $footCount = ([regex]::Matches($text, 'href="/locations/">Service Areas</a>')).Count
         if ($footCount -ne 1) { $problems.Add("$rel : footer Service Areas link count = $footCount") }
+
+        $guideFootCount = ([regex]::Matches($text, 'href="/guides/">Seller Guides</a>')).Count
+        if ($guideFootCount -ne 1) { $problems.Add("$rel : footer Seller Guides link count = $guideFootCount") }
     }
 
     # Email typos
